@@ -58,3 +58,4 @@ end
 
 gem 'bootstrap', '~> 4.1.0'
 gem 'simple_form'
+gem 'devise'
