@@ -18,11 +18,18 @@ RSpec.describe GramsController, type: :controller do
 
   describe "grams#create action" do
     it "should successfully create a gram in our database" do
-      post :create, params: { gram: { message: 'Hello!' }}
+      post :create, params: { gram: { message: 'hello!' }}
       expect(response).to redirect_to root_path
 
       gram = Gram.last
       expect(gram.message).to eq("hello!")
+    end
+
+    it "should properly deal with validation errors" do
+      post :create, params: {gram: {message: ''}}
+      expect(response).to have_http_status(:unprocessable_entity)
+      #make sure the gram hasn't been saved in db
+      expect(Gram.count).to eq 0
     end
   end
 end
