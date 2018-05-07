@@ -5,6 +5,9 @@ class GramsController < ApplicationController
     @gram = Gram.new
   end
 
+  def index
+    @grams = Gram.all
+  end
 
   def create
     @gram = current_user.grams.create(gram_params)
@@ -62,7 +65,7 @@ class GramsController < ApplicationController
 
 
   def gram_params
-    params.require(:gram).permit(:message)
+    params.require(:gram).permit(:message, :picture)
   end
 
   def validate_gram
