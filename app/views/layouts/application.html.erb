@@ -6,9 +6,31 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+
   </head>
 
   <body>
+    <div class="top-nav">
+      <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <div class="brand float-left">
+          <%= link_to 'Grammable', root_path, class:'logo'%>
+        </div>
+        <div class="add float-right">
+          <% if current_user %>
+            You're signed in as <%= current_user.email %>
+            <%= link_to "New Post", new_gram_path %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path %>
+            <%= link_to "Sign Up", new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br class="clear-fix" />
     <% if notice.present? %>
       <p class="alert alert-info"><%= notice %></p>
     <% end %>
@@ -16,12 +38,14 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
+<!--
     <% if user_signed_in? %>
       <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to 'Sign In', new_user_session_path %>
       <%= link_to 'Sign Up', new_user_registration_path %>
     <% end %>
+-->
 
     <%= yield %>
   </body>
